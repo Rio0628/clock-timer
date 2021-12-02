@@ -50,10 +50,68 @@ body {
   text-decoration: none;
 }
 
-/* Name="container">
-        <div className='linkContainer'>
-          <Router>
-            <p className='indLink'><Link to='/'>Clock</Link></p>
-            <p className='indLink'><Link to='/timer'>Timer</Link></p>
-            <p className='indLink'><Link to='/sessions'>Sessions</Link></p>
-          </Router> */
+/* -- MAIN CLOCK STYLES -- */
+
+.clockViewCntr {
+  height: 100vh;
+  width: 100vw;
+  /* outline: 1px solid red; */
+}
+
+.clockViewHeading {
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 4px;
+  font-weight: 600;
+  /* outline: 1px solid blue; */
+}
+
+.mainClock {
+  position: relative;
+  top: 3rem;
+  font-weight: 800;
+  font-size: 60px;
+  letter-spacing: 2px;
+  text-align: center;
+  /* outline: 1px solid red; */
+}
+
+.mainClock span {
+  /* right: 10px; */
+  letter-spacing: 0px;
+  font-size: 40px;
+}
+
+.timeZoneCntr {
+  position: relative;
+  top: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* box-shadow: 1px 1px 0px #768398, -1px -1px 0px #768398; */
+}
+
+.indTimezone {
+  font-size: 20px;
+  padding: 1px 20px;
+  color: #e8e9eb;
+  text-decoration: none;
+  font-weight: 600;
+  /* outline: 1px solid gray; */
+  /* box-shadow: 1px 0px 0px #768398; */
+  cursor: pointer;
+}
+
+.indLink:nth-child(3) {
+  box-shadow: 0px 0px 0px #768398;
+}
+
+.indTimezone:hover {
+  color: #f1a208;
+  transition: .1s all;
+}
+
+.indTimezone:active {
+  background: rgba( 232, 233, 235, .4);
+  transition: .1s all;
+}
