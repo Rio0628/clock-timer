@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import api from './api';
 
 
@@ -6,10 +7,20 @@ class App extends Component {
   render () {
 
     console.log('mario')
-    api.getAllSessions().then(sessions => console.log(sessions))
+    // api.getAllSessions().then(sessions => console.log(sessions))
+    
+    
     return (
       <div className="container">
-        <h1>Hello</h1>
+        <div className='linkContainer'>
+          <Router>
+            <p className='indLink'><Link className='Link' to='/'>Clock</Link></p>
+            <p className='indLink'><Link className='Link' to='/timer'>Timer</Link></p>
+            <p className='indLink'><Link className='Link' to='/sessions'>Sessions</Link></p>
+          </Router>
+        </div>
+        
+        <h1>Hello 1234567890</h1>
       </div>
     );
   }
