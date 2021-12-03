@@ -224,6 +224,46 @@ body {
   overflow: hidden;
 }
 
+.inputTimer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* outline: 1px solid red; */
+  height: 12rem;
+  width: 100vw;
+}
+
+.inputTimer p {
+  position: relative;
+  top: 30%;
+  margin-left: 2px;
+  /* text-align: center; */
+  /* outline: 1px solid red; */
+  height: 2rem;
+}
+
+.inputHours, .inputMinutes, .inputSeconds {
+  position: relative;
+  top: 35%;
+  height: 20%;
+  font-size: 18px;
+  text-align: center;
+  color: #e8e9eb;
+  background: #203759;
+  /* -webkit-appearance: none; */
+  /* appearance: none; */
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.inputHours option {
+  background: none;
+}
+
+.inputMinutes, .inputSeconds {
+  margin-left: 10px ;
+}
+
 #removeTimerBtn {
   /* position: absolute; */
   /* right: .7rem; */
@@ -244,19 +284,38 @@ body {
   transition: .1s linears;
 }
 
+.saveSessionCntr {
+  width: 75%;
+  height: 1.5rem;
+  outline: 1px solid #e8e9eb;
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
 
+.sessionNameInput {
+  width: 80%;
+  /* outline: 1px solid green; */
+  background: none;
+  border: none;
+  padding: 0px 5px;
+  color: #e8e9eb;
+}
 
-/* 
-            <div className='saveSessionCntr'>
-                <input className='sessionNameInput'/>
-                <div className='saveSessionBtn'>Save</div>
-            </div> 
+.saveSessionBtn {
+  padding: 0px 12px;
+  outline: 1px solid #e8e9eb;
+  cursor: pointer;
+}
 
-             <div className='inputTimer'>
-                <select className='inputHours'>{hoursCntr}</select>
-                <select className='inputMinutes'>{minutesCntr}</select>
-                <select className='inputSeconds'>{secondsCntr}</select>
-            </div>
+.saveSessionBtn:hover {
+  outline: 2px solid #e8e9eb;
+  font-weight: 800;
+  transition: .1s linear;
+}
 
-            <div className='crntTimersCntr'>
-                <div className='indTimer'>20:20 <p id='removeTimerBtn'>X</p */
+.saveSessionBtn:active {
+  background: #e8e9eb;
+  color: #031d44;
+  transition: .1s linear;
+}

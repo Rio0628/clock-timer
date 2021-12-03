@@ -3,15 +3,15 @@ import React from 'react';
 const TimerView = () => {
     let hoursCntr = [], minutesCntr = [], secondsCntr = [];
 
-    for (let i = 1; i <= 24; i++) {
+    for (let i = 0; i <= 24; i++) {
         hoursCntr.push( <option>{i}</option>)
     }
 
-    for (let i = 1; i <= 60; i++) {
+    for (let i = 0; i <= 60; i++) {
         minutesCntr.push( <option>{i}</option>)
     }
 
-    for (let i = 1; i <= 60; i++) {
+    for (let i = 0; i <= 60; i++) {
         secondsCntr.push( <option>{i}</option>)
     }
 
@@ -19,20 +19,23 @@ const TimerView = () => {
         <div className='timerCntr'>
             <p className='timerCntrHdng'>Timer</p>
         
-            <div className='saveBtn'>Save Session</div>
+            {/* <div className='saveBtn'>Save Session</div> */}
 
-            {/* <div className='saveSessionCntr'>
-                <input className='sessionNameInput'/>
+            <div className='saveSessionCntr'>
+                <input className='sessionNameInput' placeholder='Session Name'/>
                 <div className='saveSessionBtn'>Save</div>
-            </div> */}
+            </div>
 
-            <p className='mainTimer'>00:00:00</p>
+            {/* <p className='mainTimer'>00:00:00</p> */}
 
-            {/* <div className='inputTimer'>
+            <div className='inputTimer'>
                 <select className='inputHours'>{hoursCntr}</select>
+                <p>hrs</p>
                 <select className='inputMinutes'>{minutesCntr}</select>
+                <p>mins</p>
                 <select className='inputSeconds'>{secondsCntr}</select>
-            </div> */}
+                <p>sec</p>
+            </div>
 
             <div className='timerBtnsCntr'>
                 <div className='cancelBtn'>Cancel</div>
