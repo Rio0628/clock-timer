@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import ClockView from './components/ClockView';
 import TimerView from './components/TimerView';
+import TimerSSNSview from './components/TimerSSNSview';
 import api from './api';
 
 
@@ -22,7 +23,8 @@ class App extends Component {
           </Router>
         </div>
         
-        <TimerView />
+        <TimerSSNSview />
+        {/* <TimerView /> */}
         {/* <ClockView />  */}
         {/* <h1>Hello 1234567890</h1> */}
       </div>

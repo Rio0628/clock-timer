@@ -52,7 +52,7 @@ body {
 
 /* -- MAIN CLOCK STYLES -- */
 
-.clockViewCntr, .timerCntr {
+.clockViewCntr, .timerCntr, .timerSsnsView {
   /* position: relative; */
   /* bottom: 1.45rem; */
   display: flex;
@@ -63,7 +63,7 @@ body {
   outline: 1px solid red;
 }
 
-.clockViewHeading, .timerCntrHdng {
+.clockViewHeading, .timerCntrHdng, .timerSsnsHdng{
   font-size: 24px;
   text-align: center;
   letter-spacing: 4px;
@@ -281,7 +281,7 @@ body {
 #removeTimerBtn:active {
   background: none;
   color: #f21b3f;
-  transition: .1s linears;
+  transition: .1s linear;
 }
 
 .saveSessionCntr {
@@ -319,3 +319,186 @@ body {
   color: #031d44;
   transition: .1s linear;
 }
+
+/* -- TIMER SESSIONS STYLES -- */
+
+.searchbar {
+  width: 75%;
+  height: 1.2rem;
+  font-size: 16px;
+  background: rgba( 232, 233, 235, .1);
+  border: none;
+  /* outline:1px solid #768398; */
+  color: #e8e9eb;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+.searchbar:focus {
+  outline: 1px solid #768398;
+  background: transparent;
+  transition: .2s linear;
+}
+
+.timerSsnsCntr {
+  /* outline: 1px solid blue; */
+  position: relative;
+  top: 1rem;
+  width: 100vw;
+  height: 78.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timerSessionCls {
+  position: relative;
+  top: 1rem;
+  /* width: 100%; */
+  height: 3rem;
+  padding: 5px 10px;
+  outline: 1px solid #e8e9eb;
+  /* background: rgba( 232, 233, 235, .1); */
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.timerSessionCls:hover, .timerSessionOpen:hover{
+  background: rgba( 232, 233, 235, .1);
+  transition: .1s all; 
+}
+
+.timerSessionCls:active, .timerSessionOpen:active {
+  background: rgba( 232, 233, 235, .3);
+  transition: .1s all; 
+}
+
+.name-rmvBtnCntr {
+  display: flex;
+  /* outline: 1px solid red; */
+}
+
+.nameOfSession {
+  position: relative;
+  bottom: 1rem;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  /* outline: 1px solid yellow; */
+}
+
+.removeSessionBtn {
+  position: absolute;
+  right: .4rem;
+  height: 1.3rem;
+  font-weight: 600;
+  padding: 1px 3px; 
+  /* outline: 1px solid red; */
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.removeSessionBtn:hover {
+  outline: 1px solid #e8e9eb;
+  box-shadow: 2px 2px 2px #e8e9eb;
+  transition: .1s linear;
+}
+
+.removeSessionBtn:active {
+  background: #e8e9eb;
+  color: #031d44;
+}
+
+.timerSessionOpen { cursor: pointer; }
+
+.intervalsCntrCls {
+  position: relative;
+  bottom: 1.8rem;
+  width: 75%;
+  height: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* outline: 1px solid green; */
+}
+
+.intervalTime {
+  font-size: 17px;
+  padding: 1px 5px;
+  color: #203759;
+  background: rgba( 232, 233, 235, .7);
+  border-radius: 10px;
+  /* outline: 1px solid red; */
+}
+
+.timerSessionOpen {
+  position: relative;
+  top: 2rem; 
+  outline: 1px solid #e8e9eb;
+  border-radius: 2px;
+}
+
+.timerSessionOpen .name-rmvBtnCntr {
+  /* outline: 1px solid red; */
+}
+
+.nameOfSessionOpen {
+  position: relative;
+  left: 10px;
+  bottom: 2px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.timerSessionOpen .name-rmvBtnCntr .removeSessionBtn {
+  top: .9rem;
+}
+
+.descriptionSession {
+  position: relative;
+  bottom: 20px;
+  /* outline: 1px solid red; */
+  height: 4rem;
+  padding: 2px 5px;
+}
+
+.intervalsCntrOpen {
+  position: relative;
+  bottom: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* outline: 1px solid red; */
+  padding: 5px 0px;
+}
+
+.indInterval {
+  width: 95%;
+  height: 1.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 1px 5px;
+  color: #203759;
+  background: rgba( 232, 233, 235, .7);
+  border-radius: 10px;
+}
+
+.sessionInterval {
+  position: relative;
+  left: 5px; 
+}
+
+.intervalTimeOpen {
+  position: relative;
+  right: 5px;
+} 
+
+/*
+                <div className='intervalsCntrOpen'>
+                    <div className='indInterval'>
+                        <p className='sessionInterval'>Interval 1</p>
+                        <p className='intervalTimeOpen'>' */
