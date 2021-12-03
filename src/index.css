@@ -52,13 +52,18 @@ body {
 
 /* -- MAIN CLOCK STYLES -- */
 
-.clockViewCntr {
+.clockViewCntr, .timerCntr {
+  /* position: relative; */
+  /* bottom: 1.45rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
   width: 100vw;
-  /* outline: 1px solid red; */
+  outline: 1px solid red;
 }
 
-.clockViewHeading {
+.clockViewHeading, .timerCntrHdng {
   font-size: 24px;
   text-align: center;
   letter-spacing: 4px;
@@ -115,3 +120,143 @@ body {
   background: rgba( 232, 233, 235, .4);
   transition: .1s all;
 }
+
+/* -- TIMER STYLES --  */
+
+.saveBtn {
+  width: 75%;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 1px 10px;
+  border-radius: 5px;
+  outline: 1px solid #e8e9eb;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  box-shadow: 4px 3px 0px #e8e9eb;
+  transition: .1s ease-in-out;
+}
+
+.saveBtn:active {
+  color: #768398;
+  /* outline: 1px solid #768398;  */
+  box-shadow: 4px 3px 0px #768398;
+  transition: .1s all;
+}
+
+.mainTimer {
+  position: relative;
+  font-weight: 800;
+  font-size: 60px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.timerBtnsCntr {
+  width: 75vw;
+  display: flex;
+  justify-content: space-between;
+  /* outline: 1px solid red; */
+}
+
+.cancelBtn, .startPauseBtn {
+  height: 5rem;
+  width: 5rem;
+  font-size: 20px;
+  text-align: center;
+  line-height: 4.5rem;
+  letter-spacing: 1px;
+  outline: 2px solid #e8e9eb;
+  /* padding: 30px 20px; */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cancelBtn:hover, .startPauseBtn:hover {
+  outline: 2px solid #f1a208;
+  color: #f1a208;
+  transition: .2s linear;
+}
+
+.cancelBtn:active {
+  outline: 2px solid #f21b3f;
+  color: #f21b3f;
+  transition: .2s linear;
+}
+
+.startPauseBtn:active {
+  outline: 2px solid #4acf22;
+  color: #4acf22;
+  transition: .2s linear;
+}
+
+.crntTimersCntr {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 2rem;
+  width: 80%;
+  min-height: 10%;
+  border-radius: 5px;
+  outline: 1px solid #768398;
+  overflow: auto;
+}
+
+.crntTimersCntr::-webkit-scrollbar {
+  width: 0px;
+}
+
+.indTimer {
+  position: relative;
+  top: 10px;
+  width: 88%;
+  height: 40%;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 0px 0px 10px;
+  outline: 1px solid #e8e9eb;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#removeTimerBtn {
+  /* position: absolute; */
+  /* right: .7rem; */
+  padding: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  /* outline: 1px solid red; */
+}
+
+#removeTimerBtn:hover {
+  background: #f21b3f;
+  transition: .1s linear;
+}
+
+#removeTimerBtn:active {
+  background: none;
+  color: #f21b3f;
+  transition: .1s linears;
+}
+
+
+
+/* 
+            <div className='saveSessionCntr'>
+                <input className='sessionNameInput'/>
+                <div className='saveSessionBtn'>Save</div>
+            </div> 
+
+             <div className='inputTimer'>
+                <select className='inputHours'>{hoursCntr}</select>
+                <select className='inputMinutes'>{minutesCntr}</select>
+                <select className='inputSeconds'>{secondsCntr}</select>
+            </div>
+
+            <div className='crntTimersCntr'>
+                <div className='indTimer'>20:20 <p id='removeTimerBtn'>X</p */
