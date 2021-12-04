@@ -5,7 +5,7 @@ const ClockView = () => {
         <div className='clockViewCntr'>
             <p className='clockViewHeading'>Clock</p>
 
-            <p className='mainClock'>00:00 <span>am</span></p>
+            <p className='mainClock'>00:00:00 <span>am</span></p>
 
             <div className='timeZoneCntr'>
                 <p className='indTimezone'>Eastern</p>
