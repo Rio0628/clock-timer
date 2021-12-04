@@ -1,9 +1,9 @@
 import React from 'react';
 
-const IndTimerSession = () => {
+const IndTimerSession = (props) => {
     return (
         <div className='indTimerSession'>
-            <div className='timerSessionCls'>
+            <div className='timerSessionCls' onClick={props.onClick}>
                 <div className='name-rmvBtnCntr'>
                     <p className='nameOfSession'>Session Name</p>
                     <div className='removeSessionBtn'>Remove</div>
@@ -15,7 +15,7 @@ const IndTimerSession = () => {
                 </div>
             </div>
 
-            <div className='timerSessionOpen'>
+            <div className='timerSessionOpen' onClick={props.onClick}>
                 <div className='name-rmvBtnCntr'>
                     <p className='nameOfSessionOpen'>Session Name</p>
                     <div className='removeSessionBtn'>Remove</div>

@@ -9,7 +9,7 @@ const TimerSSNSview = (props) => {
             <input className='searchbar' onChange={props.onChange} placeholder='Search Saved Session...'/> 
 
             <div className='timerSsnsCntr'>
-                <IndTimerSession />
+                <IndTimerSession onClick={props.onClick}/>
             </div>
 
         </div>

@@ -371,6 +371,7 @@ body {
 
 .name-rmvBtnCntr {
   display: flex;
+  pointer-events: none;
   /* outline: 1px solid red; */
 }
 
@@ -457,6 +458,7 @@ body {
   /* outline: 1px solid red; */
   height: 4rem;
   padding: 2px 5px;
+  pointer-events: none;
 }
 
 .intervalsCntrOpen {

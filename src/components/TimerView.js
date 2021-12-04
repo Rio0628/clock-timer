@@ -23,7 +23,7 @@ const TimerView = (props) => {
 
             <div className='saveSessionCntr'>
                 <input className='sessionNameInput' placeholder='Session Name' onChange={props.onChange}/>
-                <div className='saveSessionBtn'>Save</div>
+                <div className='saveSessionBtn' onClick={props.onClick}>Save</div>
             </div>
 
             {/* <p className='mainTimer'>00:00:00</p> */}
@@ -38,12 +38,12 @@ const TimerView = (props) => {
             </div>
 
             <div className='timerBtnsCntr'>
-                <div className='cancelBtn'>Cancel</div>
-                <div className='startPauseBtn'>Start</div>
+                <div className='cancelBtn' onClick={props.onClick}>Cancel</div>
+                <div className='startPauseBtn' onClick={props.onClick}>Start</div>
             </div>
-
+ 
             <div className='crntTimersCntr'>
-                <div className='indTimer'>20:20 min<p id='removeTimerBtn'>X</p></div>
+                <div className='indTimer'>20:20 min<p id='removeTimerBtn' onClick={props.onClick}>X</p></div>
             </div>
         </div>
     );
