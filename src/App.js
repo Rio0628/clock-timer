@@ -7,12 +7,43 @@ import api from './api';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      test: true,
+    }
+  }
+
   render () {
 
-    console.log('mario')
+    // console.log('mario')
     // api.getAllSessions().then(sessions => console.log(sessions))
     
-    
+    const onChange = (e) => {
+      console.log(e.target)
+
+      if (e.target.className === 'sessionNameInput') {
+        this.setState({ nameSessionInput: e.target.value });
+      }
+
+      if (e.target.className === 'inputHours') {
+        this.setState({ hoursInput: e.target.value });
+      }
+
+      if (e.target.className === 'inputMinutes') {
+        this.setState({ minutesInput: e.target.value })
+      }
+
+      if (e.target.className === 'inputSeconds') {
+        this.setState({ secondsInput: e.target.value });
+      }
+
+      if (e.target.className === 'searchbar') {
+        this.setState({ searchInput: e.target.value })
+      }
+    }
+
+
     return (
       <div className="container">
         <Router>
@@ -24,8 +55,8 @@ class App extends Component {
 
           <Routes>
             <Route path='/' element={ <ClockView /> }/>
-            <Route path='/timer' element={ <TimerView /> }/>
-            <Route path='/sessions' element={ <TimerSSNSview /> }/>
+            <Route path='/timer' element={ <TimerView onChange={onChange}/> }/>
+            <Route path='/sessions' element={ <TimerSSNSview onChange={onChange} /> }/>
           </Routes>
 
         </Router>
