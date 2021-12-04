@@ -60,7 +60,7 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 }
 
 .clockViewHeading, .timerCntrHdng, .timerSsnsHdng{
@@ -554,7 +554,7 @@ body {
 
   .indTimerSession {
     width: 55%;
-    outline: 1px solid magenta;
+    /* outline: 1px solid magenta; */
   }
 
   .nameOfSession {
@@ -651,7 +651,7 @@ body {
 
   .indTimerSession {
     width: 50%;
-    outline: 1px solid magenta;
+    /* outline: 1px solid magenta; */
   }
 
   .nameOfSession {
@@ -757,7 +757,7 @@ body {
   .sessionNameInput {
     width: 86%;
     font-size: 20px;
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
   }
 
   .inputTimer p {
