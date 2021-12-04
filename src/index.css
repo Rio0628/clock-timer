@@ -256,10 +256,6 @@ body {
   border-radius: 5px;
 }
 
-.inputHours option {
-  background: none;
-}
-
 .inputMinutes, .inputSeconds {
   margin-left: 10px ;
 }
@@ -574,7 +570,7 @@ body {
 
   .intervalsCntrCls {
     bottom: 2.2rem;
-    width: 52%;
+    width: 55%;
   }
 
   .intervalTime {
@@ -671,7 +667,7 @@ body {
 
   .intervalsCntrCls {
     /* bottom: 2.2rem; */
-    width: 42%;
+    width: 45%;
   }
 
   .intervalTime {
@@ -682,5 +678,146 @@ body {
   .nameOfSessionOpen {
     font-size: 20px;
     bottom: 10px;
+  }
+}
+
+@media screen and ( min-width: 1350px ) {
+  .indLink {
+    padding: 0px 15px;
+    letter-spacing: 5px;
+    font-size: 20px;
+  }
+
+  .clockViewHeading, .timerCntrHdng, .timerSsnsHdng {
+    font-size: 28px;
+    letter-spacing: 8px;
+  }
+
+  .indTimezone {
+    position: relative; 
+    bottom: 4rem;
+    font-size: 26px;
+    padding: 2px 32px;
+    /* outline: 1px solid red; */
+  }
+
+  .mainClock {
+    top: -.1rem;
+    font-size: 65px;
+    letter-spacing: 8px;
+  }
+
+  .saveBtn {
+    width: 45%;
+    font-size: 22px;
+    padding: 2px 13px;
+  }
+
+  .mainTimer {
+    top: -1rem;
+    font-size: 68px;
+    letter-spacing: 8px;
+  }
+
+  .timerBtnsCntr {
+    position: relative; 
+    bottom: 2rem; 
+    width: 45vw; 
+  }
+
+  .cancelBtn, .startPauseBtn {
+    height: 6rem;
+    width: 6rem;
+    font-size: 24px;
+    line-height: 6rem;
+    letter-spacing: 2px;
+  }
+
+  .crntTimersCntr {
+    width: 47%;
+  }
+
+  .indTimer {
+    top: 12px;
+    width: 95%;
+    font-size: 20px;
+  }
+
+  .inputHours, .inputMinutes, .inputSeconds { 
+    height: 25%;
+    font-size: 22px;
+    padding: 7px; 
+  }
+
+  .saveSessionCntr {
+    width: 47%;
+    height: 2rem;
+  }
+
+  .sessionNameInput {
+    width: 86%;
+    font-size: 20px;
+    outline: 1px solid red;
+  }
+
+  .inputTimer p {
+    font-size: 18px;
+    padding: 5px;
+    /* outline: 1px solid red; */
+  }
+
+  .saveSessionBtn {
+    font-size: 20px;
+    padding: 2px 28px;
+  }
+
+  .searchbar {
+    width: 40%;
+    height: 1.5rem;
+    font-size: 20px;
+    /* padding: 6px 14px; */
+  }
+
+  .indTimerSession {
+    width: 35%;
+    /* outline: 1px solid magenta; */
+  }
+
+  .timerSessionCls {
+    height: 4rem;
+  }
+
+  .nameOfSession {
+    font-size: 21px;
+    /* bottom: 1.5rem; */
+  }
+
+  .removeSessionBtn {
+    padding: 3px 5px;
+    font-size: 19px;
+    /* bottom: 1.5rem; */
+  }
+
+  .intervalsCntrCls {
+    bottom: 2rem;
+    width: 46%;
+  }
+
+  .intervalTime {
+    padding: 1px 7px;
+    font-size: 20px;
+  }
+
+  .nameOfSessionOpen {
+    font-size: 21px;
+    bottom: 10px;
+  }
+
+  .descriptionSession {
+    font-size: 18px;
+  }
+
+  .indInterval {
+    font-size: 19px;
   }
 }
