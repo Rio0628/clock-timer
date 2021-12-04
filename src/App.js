@@ -26,7 +26,6 @@ class App extends Component {
         <TimerSSNSview />
         {/* <TimerView /> */}
         {/* <ClockView />  */}
-        {/* <h1>Hello 1234567890</h1> */}
       </div>
     );
   }
