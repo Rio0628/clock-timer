@@ -357,6 +357,7 @@ body {
   /* background: rgba( 232, 233, 235, .1); */
   border-radius: 2px;
   cursor: pointer;
+  /* margin-bottom: 0px; */
 }
 
 .timerSessionCls:hover, .timerSessionOpen:hover{
@@ -407,7 +408,12 @@ body {
   color: #031d44;
 }
 
-.timerSessionOpen { cursor: pointer; }
+.indTimerSession { margin-bottom: 20px; }
+
+.timerSessionOpen { 
+  margin-bottom: 20px;
+  cursor: pointer; 
+}
 
 .intervalsCntrCls {
   position: relative;
@@ -484,6 +490,7 @@ body {
   color: #203759;
   background: rgba( 232, 233, 235, .7);
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .sessionInterval {
@@ -495,10 +502,6 @@ body {
   position: relative;
   right: 5px;
 } 
-
-.indTimerSession {
-  margin-bottom: 20px;
-}
 
 @media screen and ( min-width: 630px ) {
   .indLink {

@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: true,
+      sessionOpen: false,
     }
   }
 
@@ -57,12 +57,22 @@ class App extends Component {
       }
 
       if (e.target.className === 'removeSessionBtn') {
-        await api.deleteSessionById(e.target.getAttribute('session')).then( session => alert('Session Deleted.') );
-        await api.getAllSessions().then( sessions => this.setState({ timerSessions: sessions.data.data }) )
+        await api.deleteSessionById(e.target.getAttribute('session')).then( session => alert('Session Deleted.') ).catch( err => this.setState({ timerSessions: '' }) );
+        await api.getAllSessions().then( sessions => this.setState({ timerSessions: sessions.data.data }) ).catch( err => this.setState({ timerSessions: '' }) )
+      }
+
+      if (e.target.className === 'timerSessionCls') {
+        this.setState({ currentSession: e.target.getAttribute('session') });
+        this.setState({ sessionOpen: !this.state.sessionOpen })
+      }
+
+      if (e.target.className === 'timerSessionOpen') {
+        this.setState({ currentSession: e.target.getAttribute('session') });
+        this.setState({ sessionOpen: false });
       }
     } 
 
-    console.log(this.state.timerSessions)
+    console.log(this.state.sessionOpen)
 
     return (
       <div className="container">
@@ -76,7 +86,7 @@ class App extends Component {
           <Routes>
             <Route path='/' element={ <ClockView onClick={onClick} /> }/>
             <Route path='/timer' element={ <TimerView onClick={onClick} onChange={onChange}/> }/>
-            <Route path='/sessions' element={ <TimerSSNSview sessions={this.state.timerSessions} onClick={onClick} onChange={onChange} /> }/>
+            <Route path='/sessions' element={ <TimerSSNSview currentSession={this.state.currentSession} isSessionOpen={this.state.isSessionOpen} sessions={this.state.timerSessions} onClick={onClick} onChange={onChange} /> }/>
           </Routes>
 
         </Router>

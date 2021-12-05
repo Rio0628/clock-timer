@@ -6,7 +6,7 @@ const TimerSSNSview = (props) => {
 
     if (props.sessions) {
         for (let i = 0; i < props.sessions.length; i++) {
-            indSessionCntr.push( <IndTimerSession session={props.sessions[i]} onClick={props.onClick} key={'Session ' + i}/> )
+            indSessionCntr.push( <IndTimerSession currentSession={props.currentSession} isSessionOpen={props.isSessionOpen} session={props.sessions[i]} onClick={props.onClick} key={'Session ' + i}/> )
         }
     }
   
