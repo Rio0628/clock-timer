@@ -393,6 +393,7 @@ body {
   /* outline: 1px solid red; */
   cursor: pointer;
   border-radius: 5px;
+  pointer-events: all;
 }
 
 .removeSessionBtn:hover {
@@ -494,6 +495,10 @@ body {
   position: relative;
   right: 5px;
 } 
+
+.indTimerSession {
+  margin-bottom: 20px;
+}
 
 @media screen and ( min-width: 630px ) {
   .indLink {

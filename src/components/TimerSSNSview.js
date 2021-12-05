@@ -2,6 +2,16 @@ import React from 'react';
 import IndTimerSession from './IndTimerSession';
 
 const TimerSSNSview = (props) => {
+    let indSessionCntr = [];
+
+    if (props.sessions) {
+        for (let i = 0; i < props.sessions.length; i++) {
+            indSessionCntr.push( <IndTimerSession session={props.sessions[i]} onClick={props.onClick} key={'Session ' + i}/> )
+        }
+    }
+  
+
+
     return (
         <div className='timerSsnsView'>
             <p className='timerSsnsHdng'>Saved Timer Sessions</p>
@@ -9,7 +19,7 @@ const TimerSSNSview = (props) => {
             <input className='searchbar' onChange={props.onChange} placeholder='Search Saved Session...'/> 
 
             <div className='timerSsnsCntr'>
-                <IndTimerSession onClick={props.onClick}/>
+                {indSessionCntr}
             </div>
 
         </div>

@@ -29,24 +29,54 @@ class App extends Component {
       if (e.target.className === 'searchbar') { this.setState({ searchInput: e.target.value }) }
     }
 
-    const onClick = (e) => {
+    const onClick = async (e) => {
       console.log(e.target.className);
+
+      if (e.target.className === 'Link') {
+        if (e.target.id === 'clock') {
+          this.setState({ timerView: false });
+          this.setState({ sessionsView: false })
+          this.setState({ clockView: true });
+        }
+
+        if (e.target.id === 'timer') {
+          this.setState({ clockView: false });
+          this.setState({ sessionsView: false });
+          this.setState({ timerView: true });
+        }
+
+        if (e.target.id === 'sessions') {
+          let sessions;
+          await api.getAllSessions().then( allSessions => sessions = allSessions.data.data )
+          this.setState({ timerSessions: sessions });
+
+          this.setState({ clockView: false });
+          this.setState({ timerView: false });
+          this.setState({ sessionsView: true });
+        }
+      }
+
+      if (e.target.className === 'removeSessionBtn') {
+        await api.deleteSessionById(e.target.getAttribute('session')).then( session => alert('Session Deleted.') );
+        await api.getAllSessions().then( sessions => this.setState({ timerSessions: sessions.data.data }) )
+      }
     } 
 
+    console.log(this.state.timerSessions)
 
     return (
       <div className="container">
         <Router>
           <div className='linkContainer'>
-            <p className='indLink'><Link className='Link' to='/'>Clock</Link></p>
-            <p className='indLink'><Link className='Link' to='/timer'>Timer</Link></p>
-            <p className='indLink'><Link className='Link' to='/sessions'>Sessions</Link></p>
+            <p className='indLink'><Link className='Link' id='clock' to='/' onClick={onClick}>Clock</Link></p>
+            <p className='indLink'><Link className='Link' id='timer' to='/timer' onClick={onClick}>Timer</Link></p>
+            <p className='indLink'><Link className='Link' id='sessions' to='/sessions' onClick={onClick}>Sessions</Link></p>
           </div>
 
           <Routes>
             <Route path='/' element={ <ClockView onClick={onClick} /> }/>
             <Route path='/timer' element={ <TimerView onClick={onClick} onChange={onChange}/> }/>
-            <Route path='/sessions' element={ <TimerSSNSview onClick={onClick} onChange={onChange} /> }/>
+            <Route path='/sessions' element={ <TimerSSNSview sessions={this.state.timerSessions} onClick={onClick} onChange={onChange} /> }/>
           </Routes>
 
         </Router>
