@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       sessionOpen: false,
+      sessionClosed: true,
     }
   }
 
@@ -19,14 +20,26 @@ class App extends Component {
     // console.log('mario')
     // api.getAllSessions().then(sessions => console.log(sessions))
     
-    const onChange = (e) => {
+    const onChange = async (e) => {
       console.log(e.target)
 
       if (e.target.className === 'sessionNameInput') { this.setState({ nameSessionInput: e.target.value }); }
+      
       if (e.target.className === 'inputHours') { this.setState({ hoursInput: e.target.value }); }
+      
       if (e.target.className === 'inputMinutes') { this.setState({ minutesInput: e.target.value }); }
+      
       if (e.target.className === 'inputSeconds') { this.setState({ secondsInput: e.target.value }); }
-      if (e.target.className === 'searchbar') { this.setState({ searchInput: e.target.value }) }
+
+      if (e.target.className === 'searchbar') {
+        const searchResult = this.state.timerSessions.filter( session => session.name.toLowerCase().search(e.target.value) !== -1 )
+        this.setState({ timerSessions: searchResult });
+        
+        if (e.target.value.length < 1) {
+          await api.getAllSessions().then( sessions => this.setState({ timerSessions: sessions.data.data }));
+        }
+      }
+    
     }
 
     const onClick = async (e) => {
@@ -67,8 +80,8 @@ class App extends Component {
       }
 
       if (e.target.className === 'timerSessionOpen') {
-        this.setState({ currentSession: e.target.getAttribute('session') });
-        this.setState({ sessionOpen: false });
+        this.setState({ currentSession: '' });
+        this.setState({ sessionClosed: !this.state.sessionClosed });
       }
     } 
 
@@ -86,7 +99,7 @@ class App extends Component {
           <Routes>
             <Route path='/' element={ <ClockView onClick={onClick} /> }/>
             <Route path='/timer' element={ <TimerView onClick={onClick} onChange={onChange}/> }/>
-            <Route path='/sessions' element={ <TimerSSNSview currentSession={this.state.currentSession} isSessionOpen={this.state.isSessionOpen} sessions={this.state.timerSessions} onClick={onClick} onChange={onChange} /> }/>
+            <Route path='/sessions' element={ <TimerSSNSview currentSession={this.state.currentSession} isSessionOpen={this.state.isSessionOpen} isSessionClosed={this.state.sessionClosed} sessions={this.state.timerSessions} onClick={onClick} onChange={onChange} /> }/>
           </Routes>
 
         </Router>

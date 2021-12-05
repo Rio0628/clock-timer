@@ -1,10 +1,11 @@
 import React from 'react';
 
 const IndTimerSession = (props) => {
-    let intervalIsOpen = false, previewIntervals = [], allIntervals = [];
+    let intervalIsOpen = false, intervalIsClosed = true , previewIntervals = [], allIntervals = [];
         
     if (props.session._id === props.currentSession) {
         intervalIsOpen = props.isSessionOpen;
+        intervalIsClosed = props.isSessionClosed;
         // if (!props.isSessionOpen) { intervalIsOpen = false }
     }
 
@@ -30,7 +31,7 @@ const IndTimerSession = (props) => {
 
     return (
         <div className='indTimerSession'>
-            { intervalIsOpen === false ?
+            { intervalIsOpen === false && intervalIsClosed === true ?
                 <div className='timerSessionCls' session={props.session._id} onClick={props.onClick}>
                     <div className='name-rmvBtnCntr'>
                         <p className='nameOfSession'>{props.session.name}</p>
