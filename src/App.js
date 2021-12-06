@@ -20,6 +20,27 @@ class App extends Component {
     // console.log('mario')
     // api.getAllSessions().then(sessions => console.log(sessions))
     
+    const setClock = async (region) => {
+      let date = new Date(), finalDate, timezone = region;
+
+      if (region === 'eastern') { timezone = 'America/New_York' };
+      if (region === 'central') { timezone = 'America/Denver' };
+      if (region === 'pacific') { timezone = 'America/Los_Angeles' };
+
+      finalDate = await date.toLocaleString(('en-US'), { timeZone: this.state.timezone })
+      finalDate = finalDate.split(' ');
+      finalDate = `${finalDate[1]} ${finalDate[2]}`
+      // console.log(finalDate)
+      // console.log(region)
+
+      this.setState({ timeClock: finalDate});
+      let clockTimeout = setTimeout( () => setClock(), 1000 )
+      
+      if (!this.state.clockView) { clearTimeout(clockTimeout) };
+    }
+
+    // console.log(this.state.timeClock)
+
     const onChange = async (e) => {
       console.log(e.target)
 
@@ -47,12 +68,16 @@ class App extends Component {
 
       if (e.target.className === 'Link') {
         if (e.target.id === 'clock') {
+          await this.setState({ timezone: 'America/New_York'});
+          setClock('America/New_York');
+
           this.setState({ timerView: false });
           this.setState({ sessionsView: false })
           this.setState({ clockView: true });
         }
 
         if (e.target.id === 'timer') {
+
           this.setState({ clockView: false });
           this.setState({ sessionsView: false });
           this.setState({ timerView: true });
@@ -83,9 +108,14 @@ class App extends Component {
         this.setState({ currentSession: '' });
         this.setState({ sessionClosed: !this.state.sessionClosed });
       }
+
+      if (e.target.className === 'indTimezone') {
+        await this.setState({ timezone: e.target.getAttribute('timezone') });
+        setClock('lol');
+      }
     } 
 
-    console.log(this.state.sessionOpen)
+    // console.log(this.state.sessionOpen)
 
     return (
       <div className="container">
@@ -97,7 +127,7 @@ class App extends Component {
           </div>
 
           <Routes>
-            <Route path='/' element={ <ClockView onClick={onClick} /> }/>
+            <Route path='/' element={ <ClockView currentTimezone={this.state.timezone} clockTime={this.state.timeClock} onClick={onClick} /> }/>
             <Route path='/timer' element={ <TimerView onClick={onClick} onChange={onChange}/> }/>
             <Route path='/sessions' element={ <TimerSSNSview currentSession={this.state.currentSession} isSessionOpen={this.state.isSessionOpen} isSessionClosed={this.state.sessionClosed} sessions={this.state.timerSessions} onClick={onClick} onChange={onChange} /> }/>
           </Routes>
