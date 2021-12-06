@@ -12,6 +12,10 @@ class App extends Component {
     this.state = {
       sessionOpen: false,
       sessionClosed: true,
+      statusBtn: 'start',
+      hoursInput: 0,
+      minutesInput: 0,
+      secondsInput: 0,
     }
   }
 
@@ -20,13 +24,8 @@ class App extends Component {
     // console.log('mario')
     // api.getAllSessions().then(sessions => console.log(sessions))
     
-    const setClock = async (region) => {
-      let date = new Date(), finalDate, timezone = region;
-
-      if (region === 'eastern') { timezone = 'America/New_York' };
-      if (region === 'central') { timezone = 'America/Denver' };
-      if (region === 'pacific') { timezone = 'America/Los_Angeles' };
-
+    const setClock = async () => {
+      let date = new Date(), finalDate;
       finalDate = await date.toLocaleString(('en-US'), { timeZone: this.state.timezone })
       finalDate = finalDate.split(' ');
       finalDate = `${finalDate[1]} ${finalDate[2]}`
@@ -111,11 +110,78 @@ class App extends Component {
 
       if (e.target.className === 'indTimezone') {
         await this.setState({ timezone: e.target.getAttribute('timezone') });
-        setClock('lol');
+        setClock();
+      }
+
+      if (e.target.className === 'startPauseBtn') {
+        console.log(e.target.getAttribute('current'))
+        if (e.target.getAttribute('current') === 'start') { 
+          
+          if (this.state.hoursInput > 0 && this.state.minutesInput > 0 && this.state.secondsInput > 0) {
+            currentTimer();
+
+            this.setState({ timerInUse: true });
+            this.setState({ statusBtn: 'pause' }); 
+          } else { alert('Enter time value for the timer to begin'); } 
+          
+
+        
+        }
+        else if (e.target.getAttribute('current') === 'pause') {
+          
+          this.setState({ statusBtn: 'start' });
+        }
+
+      }
+      if (e.target.className === 'cancelBtn') {
+        this.setState({ hoursInput: 0 });
+        this.setState({ minutesInput: 0 });
+        this.setState({ secondsInput: 0 });
+        this.setState({ timerInUse: false });
       }
     } 
 
-    // console.log(this.state.sessionOpen)
+    const currentTimer = () => {
+      let crntHours = parseInt(this.state.hoursInput), crntMinutes = parseInt(this.state.minutesInput), crntSecs = parseInt(this.state.secondsInput); 
+
+      if (crntSecs > 0) {
+        crntSecs = crntSecs - 1;
+        this.setState({ secondsInput: crntSecs });
+      }
+      else if (crntSecs === 0) {
+        if (crntMinutes > 0) {
+          crntMinutes = crntMinutes - 1;
+          crntSecs = 59;
+          this.setState({ minutesInput: crntMinutes});
+          this.setState({ secondsInput: crntSecs });
+        }
+        else if (crntMinutes === 0) {
+          if (crntHours > 0) {
+            crntHours = crntHours - 1;
+            crntMinutes = 59;
+            crntSecs = 59;
+            this.setState({ hoursInput: crntHours }); 
+            this.setState({ minutesInput: crntMinutes }); 
+            this.setState({ secondsInput: crntSecs }); 
+          }
+        }
+      }
+
+      // console.log(crntMinutes)
+      // console.log(crntSecs)
+      this.setState({ timerValue: `${crntHours}:${crntMinutes}:${crntSecs}`});
+
+      let timer = setTimeout(() => currentTimer(), 10 );
+
+      if (crntHours === 0 && crntMinutes === 0 && crntSecs === 0) { 
+        clearTimeout(timer) 
+        this.setState({ timerInUse: false });
+      };
+    }
+
+    // console.log(this.state.hoursInput) 
+    // console.log(this.state.minutesInput) 
+    // console.log(this.state.secondsInput) 
 
     return (
       <div className="container">
@@ -128,7 +194,7 @@ class App extends Component {
 
           <Routes>
             <Route path='/' element={ <ClockView currentTimezone={this.state.timezone} clockTime={this.state.timeClock} onClick={onClick} /> }/>
-            <Route path='/timer' element={ <TimerView onClick={onClick} onChange={onChange}/> }/>
+            <Route path='/timer' element={ <TimerView timerValue={this.state.timerValue} timerInUse={this.state.timerInUse} statusBtn={this.state.statusBtn} onClick={onClick} onChange={onChange}/> }/>
             <Route path='/sessions' element={ <TimerSSNSview currentSession={this.state.currentSession} isSessionOpen={this.state.isSessionOpen} isSessionClosed={this.state.sessionClosed} sessions={this.state.timerSessions} onClick={onClick} onChange={onChange} /> }/>
           </Routes>
 

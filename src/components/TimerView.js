@@ -26,20 +26,25 @@ const TimerView = (props) => {
                 <div className='saveSessionBtn' onClick={props.onClick}>Save</div>
             </div>
 
-            {/* <p className='mainTimer'>00:00:00</p> */}
+            { props.timerInUse ?
+                <p className='mainTimer'>{props.timerValue}</p> 
+            :
+                <div className='inputTimer'>
+                    <select className='inputHours' onChange={props.onChange}>{hoursCntr}</select>
+                    <p>hrs</p>
+                    <select className='inputMinutes' onChange={props.onChange}>{minutesCntr}</select>
+                    <p>mins</p>
+                    <select className='inputSeconds' onChange={props.onChange}>{secondsCntr}</select>
+                    <p>sec</p>
+                </div>
+            }
 
-            <div className='inputTimer'>
-                <select className='inputHours' onChange={props.onChange}>{hoursCntr}</select>
-                <p>hrs</p>
-                <select className='inputMinutes' onChange={props.onChange}>{minutesCntr}</select>
-                <p>mins</p>
-                <select className='inputSeconds' onChange={props.onChange}>{secondsCntr}</select>
-                <p>sec</p>
-            </div>
+
+           
 
             <div className='timerBtnsCntr'>
                 <div className='cancelBtn' onClick={props.onClick}>Cancel</div>
-                <div className='startPauseBtn' onClick={props.onClick}>Start</div>
+                <div className='startPauseBtn' current={props.statusBtn} onClick={props.onClick}>Start</div>
             </div>
  
             <div className='crntTimersCntr'>
