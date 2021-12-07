@@ -21,17 +21,13 @@ class App extends Component {
   }
 
   render () {
-
-    // console.log('mario')
-    // api.getAllSessions().then(sessions => console.log(sessions))
     
     const setClock = async () => {
+      // Function to set the time for the clock view according to the value of the timezone state as long as the clock view is the current view
       let date = new Date(), finalDate;
       finalDate = await date.toLocaleString(('en-US'), { timeZone: this.state.timezone })
       finalDate = finalDate.split(' ');
       finalDate = `${finalDate[1]} ${finalDate[2]}`
-      // console.log(finalDate)
-      // console.log(region)
 
       this.setState({ timeClock: finalDate});
       let clockTimeout = setTimeout( () => setClock(), 1000 )
@@ -39,150 +35,11 @@ class App extends Component {
       if (!this.state.clockView) { clearTimeout(clockTimeout) };
     }
 
-    // console.log(this.state.timeClock)
-
-    const onChange = async (e) => {
-      console.log(e.target)
-
-      if (e.target.className === 'sessionNameInput') { this.setState({ nameSessionInput: e.target.value }); }
-      
-      if (e.target.className === 'inputHours') { this.setState({ hoursInput: e.target.value }); }
-      
-      if (e.target.className === 'inputMinutes') { this.setState({ minutesInput: e.target.value }); }
-      
-      if (e.target.className === 'inputSeconds') { this.setState({ secondsInput: e.target.value }); }
-
-      if (e.target.className === 'descriptionInput') { this.setState({ descriptionInput: e.target.value });}
-
-      if (e.target.className === 'searchbar') {
-        const searchResult = this.state.timerSessions.filter( session => session.name.toLowerCase().search(e.target.value) !== -1 )
-        this.setState({ timerSessions: searchResult });
-        
-        if (e.target.value.length < 1) {
-          await api.getAllSessions().then( sessions => this.setState({ timerSessions: sessions.data.data }));
-        }
-      }
-    
-    }
-
-    const onClick = async (e) => {
-      console.log(e.target.className);
-
-      if (e.target.className === 'Link') {
-        if (e.target.id === 'clock') {
-          await this.setState({ timezone: 'America/New_York'});
-          setClock('America/New_York');
-
-          this.setState({ timerView: false });
-          this.setState({ sessionsView: false })
-          this.setState({ clockView: true });
-        }
-
-        if (e.target.id === 'timer') {
-
-          this.setState({ clockView: false });
-          this.setState({ sessionsView: false });
-          this.setState({ timerView: true });
-        }
-
-        if (e.target.id === 'sessions') {
-          let sessions;
-          await api.getAllSessions().then( allSessions => sessions = allSessions.data.data )
-          this.setState({ timerSessions: sessions });
-
-          this.setState({ clockView: false });
-          this.setState({ timerView: false });
-          this.setState({ sessionsView: true });
-        }
-      }
-
-      if (e.target.className === 'removeSessionBtn') {
-        await api.deleteSessionById(e.target.getAttribute('session')).then( session => alert('Session Deleted.') ).catch( err => this.setState({ timerSessions: '' }) );
-        await api.getAllSessions().then( sessions => this.setState({ timerSessions: sessions.data.data }) ).catch( err => this.setState({ timerSessions: '' }) )
-      }
-
-      if (e.target.className === 'timerSessionCls') {
-        this.setState({ currentSession: e.target.getAttribute('session') });
-        this.setState({ sessionOpen: !this.state.sessionOpen })
-      }
-
-      if (e.target.className === 'timerSessionOpen') {
-        this.setState({ currentSession: '' });
-        this.setState({ sessionClosed: !this.state.sessionClosed });
-      }
-
-      if (e.target.className === 'indTimezone') {
-        await this.setState({ timezone: e.target.getAttribute('timezone') });
-        setClock();
-      }
-
-      if (e.target.className === 'startPauseBtn') {
-        console.log(e.target.getAttribute('current'))
-        this.setState({ intervalCanceled: false });
-        if (e.target.getAttribute('current') === 'start') { 
-          
-          if (this.state.hoursInput > 0 || this.state.minutesInput > 0 || this.state.secondsInput > 0) {
-            await this.setState({ initialTime: `${this.state.hoursInput}:${this.state.minutesInput}:${this.state.secondsInput}`});
-
-            await this.setState({ timerPaused: false });
-            currentTimer();
-
-            this.setState({ timerInUse: true });
-            
-            this.setState({ statusBtn: 'pause' }); 
-          } else { alert('Enter time value for the timer to begin'); } 
-          
-
-        
-        }
-        else if (e.target.getAttribute('current') === 'pause') {
-          currentTimer();
-          this.setState({ timerInUse: true })
-          this.setState({ timerPaused: true });
-          this.setState({ statusBtn: 'start' });
-        }
-
-      }
-      if (e.target.className === 'cancelBtn') {
-        this.setState({ statusBtn: 'start' });
-        this.setState({ timerInUse: false });
-        this.setState({ timerPaused: false });
-        this.setState({ intervalCanceled: true });
-        this.setState({ timerInUse: false });
-      }
-
-      if (e.target.id === 'removeTimerBtn') {
-        // const updatedList = this.state.crntSessionIntrvls.forEach(interval => list.push(interval.split(',')))
-        const updatedList = this.state.crntSessionIntrvls.filter( interval => interval.interval !== e.target.getAttribute('interval'))
-        this.setState({ crntSessionIntrvls: updatedList });
-        // console.log(updatedList)
-      }
-
-      if (e.target.className === 'saveBtn') {
-        this.setState({ saveSessionOn: true });
-      }
-
-      if (e.target.className === 'saveSessionBtn') {
-        let object, descriptionInput, intervals = []; 
-
-        if (!this.state.descriptionInput) {
-          descriptionInput = 'n/a';
-        } else descriptionInput = this.state.descriptionInput;
-        
-        await this.state.crntSessionIntrvls.forEach( interval => intervals.push(interval.time))
-
-        // console.log(intervals)
-        object = await {name: this.state.nameSessionInput, intervals: intervals, description: descriptionInput};
-        await api.insertSession(object).then( obj => alert('Session Added!') ).catch( err => alert('Error Occurred: Name of session and or intervals') );
-
-        this.setState({ saveSessionOn: false });
-      }
-    } 
-
-    console.log(this.state.initialTime)
     const currentTimer = () => {
+      // Set the new timer according to the values of the hours, minutes, and seconds input states and runs the timer 
       let crntHours = parseInt(this.state.hoursInput), crntMinutes = parseInt(this.state.minutesInput), crntSecs = parseInt(this.state.secondsInput); 
 
+      // Main timer countdown code 
       if (crntSecs > 0) {
         crntSecs = crntSecs - 1;
         this.setState({ secondsInput: crntSecs });
@@ -205,9 +62,6 @@ class App extends Component {
           }
         }
       }
-
-      // console.log(crntMinutes)
-      // console.log(crntSecs)
       this.setState({ timerValue: `${crntHours}:${crntMinutes}:${crntSecs}`});
 
       let timer = setTimeout(() => currentTimer(), 10 );
@@ -229,6 +83,7 @@ class App extends Component {
         let intervalTime = this.state.initialTime, timeAcr;
         intervalTime = intervalTime.split(':');
         
+        // Sets the timer value to look a certain way according to the inputs provided 
         if (intervalTime[0] === '0') {
           if (intervalTime[1] === '0') {
             intervalTime = intervalTime[2];
@@ -242,14 +97,147 @@ class App extends Component {
           timeAcr = 'Hour'
         }
         
+        // Interval object to display each time the timer finishes a countdown 
         const interval = {time: `${intervalTime} ${timeAcr}`, interval: `interval ${this.state.crntSessionIntrvls.length}`};
         this.setState(prevState => ({ crntSessionIntrvls: [...prevState.crntSessionIntrvls, interval ] }))
       }
     }
 
-    // console.log(this.state.crntSessionIntrvls) 
-    // console.log(this.state.minutesInput) 
-    // console.log(this.state.secondsInput) 
+    const onChange = async (e) => {
+      // Main onChange function that gathers all of the values for input and select elements and sets them on their corresponding states
+
+      if (e.target.className === 'sessionNameInput') { this.setState({ nameSessionInput: e.target.value }); }
+      
+      if (e.target.className === 'inputHours') { this.setState({ hoursInput: e.target.value }); }
+      
+      if (e.target.className === 'inputMinutes') { this.setState({ minutesInput: e.target.value }); }
+      
+      if (e.target.className === 'inputSeconds') { this.setState({ secondsInput: e.target.value }); }
+
+      if (e.target.className === 'descriptionInput') { this.setState({ descriptionInput: e.target.value });}
+
+      if (e.target.className === 'searchbar') {
+        // Searchbar function to filter out the timer sessions according to the value of the search input element
+        const searchResult = this.state.timerSessions.filter( session => session.name.toLowerCase().search(e.target.value) !== -1 )
+        this.setState({ timerSessions: searchResult });
+        
+        if (e.target.value.length < 1) {
+          await api.getAllSessions().then( sessions => this.setState({ timerSessions: sessions.data.data }));
+        }
+      }
+    
+    }
+
+    const onClick = async (e) => {
+      // Main onClick function 
+      if (e.target.className === 'Link') {
+        // Sets the current view state on according to which route is clicked
+        if (e.target.id === 'clock') {
+          await this.setState({ timezone: 'America/New_York'});
+          setClock('America/New_York');
+
+          this.setState({ timerView: false });
+          this.setState({ sessionsView: false })
+          this.setState({ clockView: true });
+        }
+
+        if (e.target.id === 'timer') {
+          this.setState({ clockView: false });
+          this.setState({ sessionsView: false });
+          this.setState({ timerView: true });
+        }
+
+        if (e.target.id === 'sessions') {
+          let sessions;
+          await api.getAllSessions().then( allSessions => sessions = allSessions.data.data )
+          this.setState({ timerSessions: sessions });
+
+          this.setState({ clockView: false });
+          this.setState({ timerView: false });
+          this.setState({ sessionsView: true });
+        }
+      }
+
+      if (e.target.className === 'removeSessionBtn') {
+        // Removes a certain session from the database
+        await api.deleteSessionById(e.target.getAttribute('session')).then( session => alert('Session Deleted.') ).catch( err => this.setState({ timerSessions: '' }) );
+        await api.getAllSessions().then( sessions => this.setState({ timerSessions: sessions.data.data }) ).catch( err => this.setState({ timerSessions: '' }) )
+      }
+
+      if (e.target.className === 'timerSessionCls') {
+        // Takes cares of showing the open view of a individual session
+        this.setState({ currentSession: e.target.getAttribute('session') });
+        this.setState({ sessionOpen: !this.state.sessionOpen })
+      }
+
+      if (e.target.className === 'timerSessionOpen') {
+        // Takes cares of showing the closed view of a individual session
+        this.setState({ currentSession: '' });
+        this.setState({ sessionClosed: !this.state.sessionClosed });
+      }
+
+      if (e.target.className === 'indTimezone') {
+        // Changes the clock view according to the timezone value of each element 
+        await this.setState({ timezone: e.target.getAttribute('timezone') });
+        setClock();
+      }
+
+      if (e.target.className === 'startPauseBtn') {
+        // Function to start and pause the timer according to the attribute of the start pause button 
+        this.setState({ intervalCanceled: false });
+        if (e.target.getAttribute('current') === 'start') { 
+          // The code will only run as long as there is a value for one of the time input states
+          if (this.state.hoursInput > 0 || this.state.minutesInput > 0 || this.state.secondsInput > 0) {
+            await this.setState({ initialTime: `${this.state.hoursInput}:${this.state.minutesInput}:${this.state.secondsInput}`});
+            await this.setState({ timerPaused: false });
+            currentTimer();
+
+            this.setState({ timerInUse: true });            
+            this.setState({ statusBtn: 'pause' }); 
+          } else { alert('Enter time value for the timer to begin'); } 
+        }
+        else if (e.target.getAttribute('current') === 'pause') {
+          currentTimer();
+          this.setState({ timerInUse: true })
+          this.setState({ timerPaused: true });
+          this.setState({ statusBtn: 'start' });
+        }
+
+      }
+      if (e.target.className === 'cancelBtn') {
+        // Cancels the current timer interval 
+        this.setState({ statusBtn: 'start' });
+        this.setState({ timerInUse: false });
+        this.setState({ timerPaused: false });
+        this.setState({ intervalCanceled: true });
+        this.setState({ timerInUse: false });
+      }
+
+      if (e.target.id === 'removeTimerBtn') {
+        // Removes a certain interval from the current timer session 
+        const updatedList = this.state.crntSessionIntrvls.filter( interval => interval.interval !== e.target.getAttribute('interval'))
+        this.setState({ crntSessionIntrvls: updatedList });
+      }
+
+      // Takes care of showing the open view of the save session element 
+      if (e.target.className === 'saveBtn') { this.setState({ saveSessionOn: true }); }
+
+      if (e.target.className === 'saveSessionBtn') {
+        // Saves a the current timer session into the database 
+        let object, descriptionInput, intervals = []; 
+
+        if (!this.state.descriptionInput) {
+          descriptionInput = 'n/a';
+        } else descriptionInput = this.state.descriptionInput;
+        
+        await this.state.crntSessionIntrvls.forEach( interval => intervals.push(interval.time))
+
+        object = await {name: this.state.nameSessionInput, intervals: intervals, description: descriptionInput};
+        await api.insertSession(object).then( obj => alert('Session Added!') ).catch( err => alert('Error Occurred: Name of session and or intervals') );
+
+        this.setState({ saveSessionOn: false });
+      }
+    } 
 
     return (
       <div className="container">

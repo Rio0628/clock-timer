@@ -3,18 +3,18 @@ import React from 'react';
 const TimerView = (props) => {
     let hoursCntr = [], minutesCntr = [], secondsCntr = [], intervalsCntr = [];
 
+    // For functions to populate the select elements to allow the user to choose time 
     for (let i = 0; i <= 24; i++) {
         hoursCntr.push( <option key={i}>{i}</option>)
     }
-
     for (let i = 0; i <= 60; i++) {
         minutesCntr.push( <option key={i}>{i}</option>)
     }
-
     for (let i = 0; i <= 60; i++) {
         secondsCntr.push( <option key={i}>{i}</option>)
     }
 
+    // Function to show the current intervals that have been completed
     for (let i = 0; i < props.intervals.length; i++) {
         intervalsCntr.push( <div className='indTimer' key={'Interval ' + i}>{props.intervals[i].time}<p id='removeTimerBtn' interval={props.intervals[i].interval} onClick={props.onClick}>X</p></div> );
     }

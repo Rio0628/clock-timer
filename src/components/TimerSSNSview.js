@@ -4,13 +4,12 @@ import IndTimerSession from './IndTimerSession';
 const TimerSSNSview = (props) => {
     let indSessionCntr = [];
 
+    // Will show all of the ind sessions within the database
     if (props.sessions) {
         for (let i = 0; i < props.sessions.length; i++) {
             indSessionCntr.push( <IndTimerSession currentSession={props.currentSession} isSessionOpen={props.isSessionOpen} isSessionClosed={props.isSessionClosed} session={props.sessions[i]} onClick={props.onClick} key={'Session ' + i}/> )
         }
     }
-  
-
 
     return (
         <div className='timerSsnsView'>
