@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TimerView = (props) => {
-    let hoursCntr = [], minutesCntr = [], secondsCntr = [];
+    let hoursCntr = [], minutesCntr = [], secondsCntr = [], intervalsCntr = [];
 
     for (let i = 0; i <= 24; i++) {
         hoursCntr.push( <option key={i}>{i}</option>)
@@ -15,16 +15,22 @@ const TimerView = (props) => {
         secondsCntr.push( <option key={i}>{i}</option>)
     }
 
+    for (let i = 0; i < props.intervals.length; i++) {
+        intervalsCntr.push( <div className='indTimer' key={'Interval ' + i}>{props.intervals[i].time}<p id='removeTimerBtn' interval={props.intervals[i].interval} onClick={props.onClick}>X</p></div> );
+    }
+
     return (
         <div className='timerCntr'>
             <p className='timerCntrHdng'>Timer</p>
         
-            {/* <div className='saveBtn'>Save Session</div> */}
-
-            <div className='saveSessionCntr'>
-                <input className='sessionNameInput' placeholder='Session Name' onChange={props.onChange}/>
-                <div className='saveSessionBtn' onClick={props.onClick}>Save</div>
-            </div>
+            {props.isSaveOn ?
+               <div className='saveSessionCntr'>
+                    <input className='sessionNameInput' placeholder='Session Name' onChange={props.onChange}/>
+                    <div className='saveSessionBtn' onClick={props.onClick}>Save</div>
+                </div>
+            : <div className='saveBtn' onClick={props.onClick}>Save Session</div> }
+            
+            {props.isSaveOn ? <input className='descriptionInput' placeholder='Session Description' onChange={props.onChange}></input> : null }
 
             { props.timerInUse ?
                 <p className='mainTimer'>{props.timerValue}</p> 
@@ -37,18 +43,15 @@ const TimerView = (props) => {
                     <select className='inputSeconds' onChange={props.onChange}>{secondsCntr}</select>
                     <p>sec</p>
                 </div>
-            }
-
-
-           
+            }           
 
             <div className='timerBtnsCntr'>
                 <div className='cancelBtn' onClick={props.onClick}>Cancel</div>
-                <div className='startPauseBtn' current={props.statusBtn} onClick={props.onClick}>Start</div>
+                <div className='startPauseBtn' current={props.statusBtn} onClick={props.onClick}>{ props.statusBtn === 'start' ? 'Start' : props.statusBtn === 'pause' ? 'Pause' : null }</div>
             </div>
  
             <div className='crntTimersCntr'>
-                <div className='indTimer'>20:20 min<p id='removeTimerBtn' onClick={props.onClick}>X</p></div>
+                {intervalsCntr}
             </div>
         </div>
     );
