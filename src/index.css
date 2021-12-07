@@ -203,7 +203,8 @@ body {
   align-items: center;
   top: 2rem;
   width: 80%;
-  min-height: 10%;
+  min-height: 30%;
+  max-height: 30%;
   border-radius: 5px;
   outline: 1px solid #768398;
   overflow: auto;
@@ -217,7 +218,7 @@ body {
   position: relative;
   top: 10px;
   width: 88%;
-  height: 40%;
+  height: 2rem;
   font-size: 18px;
   display: flex;
   justify-content: space-between;
@@ -226,6 +227,7 @@ body {
   outline: 1px solid #e8e9eb;
   border-radius: 5px;
   overflow: hidden;
+  margin-bottom: 10px;
 }
 
 .inputTimer {
@@ -300,6 +302,19 @@ body {
   border: none;
   padding: 0px 5px;
   color: #e8e9eb;
+}
+
+.descriptionInput {
+  width: 75%;
+  height: 1.5rem;
+  outline: 1px solid #e8e9eb;
+  display: flex;
+  background: none;
+  border: none;
+  color: #e8e9eb;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 10px;
 }
 
 .saveSessionBtn {
@@ -559,12 +574,14 @@ body {
     padding: 0px 18px;
   }
 
-  .searchbar {
+  .searchbar, .descriptionInput {
     width: 65%;
     height: 1.3rem;
     font-size: 17px;
     padding: 4px 12px;
   }
+
+  
 
   .indTimerSession {
     width: 55%;
@@ -656,7 +673,7 @@ body {
     padding: 0px 22px;
   }
 
-  .searchbar {
+  .searchbar, .descriptionInput {
     width: 50%;
     /* height: 1.3rem; */
     font-size: 17px;
@@ -785,7 +802,7 @@ body {
     padding: 2px 28px;
   }
 
-  .searchbar {
+  .searchbar, .descriptionInput {
     width: 40%;
     height: 1.5rem;
     font-size: 20px;

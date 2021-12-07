@@ -14,7 +14,7 @@ const IndTimerSession = (props) => {
     }
     else {
         for (let i = 0; i < 2; i++) {
-            previewIntervals.push( <p className='intervalTime' key={'interval Time ' + i}>{props.session.intervals[i] + " mins"}</p> )
+            previewIntervals.push( <p className='intervalTime' key={'interval Time ' + i}>{props.session.intervals[i]}</p> )
         }
     }
 
@@ -22,7 +22,7 @@ const IndTimerSession = (props) => {
         allIntervals.push(
             <div className='indInterval' key={'interval ' + i}>
                 <p className='sessionInterval'>Interval {i + 1}</p>
-                <p className='intervalTimeOpen'>{props.session.intervals[i]} mins</p>
+                <p className='intervalTimeOpen'>{props.session.intervals[i]}</p>
             </div>
         )
     } 
