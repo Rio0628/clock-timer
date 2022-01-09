@@ -24,11 +24,11 @@ body {
 .indLink {
   text-decoration: none;
   font-weight: 600;
-  box-shadow: 1px 0px 0px #768398;
+  border-right: 1px solid #768398;
 }
 
 .indLink:nth-child(3) {
-  box-shadow: 0px 0px 0px #768398;
+  border-right: none;
 }
 
 .indLink .Link:hover {
@@ -482,6 +482,20 @@ body {
   right: 5px;
 } 
 
+@media screen and ( min-width: 440px ) {
+  .saveSessionCntr {
+    width: 21.5rem;
+  }
+
+  .searchbar, .descriptionInput {
+    width: 21.2rem;
+  }
+
+  .saveSessionBtn {
+    padding: 0px 15px;
+  }
+}
+
 @media screen and ( min-width: 630px ) {
   .indLink {
     padding: 2px 10px;
@@ -517,7 +531,7 @@ body {
   .inputHours, .inputMinutes, .inputSeconds { padding: 3px; }
 
   .saveSessionCntr {
-    width: 65%;
+    width: 36.5rem;
     height: 1.6rem;
   }
 
@@ -528,17 +542,15 @@ body {
 
   .saveSessionBtn {
     font-size: 18px;
-    padding: 0px 18px;
+    padding: 0px 22px;
   }
 
   .searchbar, .descriptionInput {
-    width: 65%;
+    width: 35rem;
     height: 1.3rem;
     font-size: 17px;
     padding: 4px 12px;
   }
-
-  
 
   .indTimerSession {
     width: 55%;
@@ -611,7 +623,7 @@ body {
   .inputHours, .inputMinutes, .inputSeconds { padding: 5px; }
 
   .saveSessionCntr {
-    width: 52%;
+    width: 39rem;
     height: 1.7rem;
   }
 
@@ -621,11 +633,11 @@ body {
 
   .saveSessionBtn {
     font-size: 19px;
-    padding: 0px 22px;
+    padding: 0px 27px;
   }
 
   .searchbar, .descriptionInput {
-    width: 50%;
+    width: 37rem;
     font-size: 17px;
   }
 
@@ -716,7 +728,7 @@ body {
   }
 
   .saveSessionCntr {
-    width: 47%;
+    width: 50em;
     height: 2rem;
   }
 
@@ -732,11 +744,11 @@ body {
 
   .saveSessionBtn {
     font-size: 20px;
-    padding: 2px 28px;
+    padding: 2px 32px;
   }
 
   .searchbar, .descriptionInput {
-    width: 40%;
+    width: 45rem;
     height: 1.5rem;
     font-size: 20px;
   }
