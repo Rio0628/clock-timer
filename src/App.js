@@ -64,7 +64,7 @@ class App extends Component {
       }
       this.setState({ timerValue: `${crntHours}:${crntMinutes}:${crntSecs}`});
 
-      let timer = setTimeout(() => currentTimer(), 10 );
+      let timer = setTimeout(() => currentTimer(), 1000 );
 
       if (this.state.intervalCanceled) { 
         this.setState({ hoursInput: 0 });

@@ -1,11 +1,9 @@
 import axios from 'axios'
 
-const api = axios.create({ baseURL: 'http://localhost:3000/api',});
-
-export const insertSession = payload => api.post('/session', payload);
-export const getAllSessions = () => api.get('/sessions');
-export const deleteSessionById = id => api.delete(`/session/${id}`);
-export const getMovieById = id => api.get(`/session/${id}`);
+export const insertSession = payload => axios.post('/api/session', payload);
+export const getAllSessions = () => axios.get('/api/session');
+export const deleteSessionById = id => axios.delete(`/api/session/${id}`);
+export const getMovieById = id => axios.get(`/api/session/${id}`);
 
 const apis = { insertSession, getAllSessions, deleteSessionById, getMovieById };
 
