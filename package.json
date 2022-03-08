@@ -26,7 +26,7 @@
   "scripts": {
     "postinstall": "cd src && npm run build",
     "server": "nodemon index.js",
-    "start": "node index.js",
+    "start": "NODE_DEBUG=* node index.js",
     "dev": "concurrently \"set PORT=8000 && react-scripts --openssl-legacy-provider start\" \"nodemon index.js\"",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
